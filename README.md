@@ -2,7 +2,7 @@
 
 ## Overview
 This project simulates a production-grade like web infrastructure on AWS. The goal was to 
-build something that could handle traffic spikes automatically without manual intervention.
+build something that could handle traffic spikes automatically without manual intervention and added launched template using  Infrastructure as Code.
 
 An Nginx app runs inside Docker containers, with images stored in ECR. When a new EC2 
 instance spins up, a User Data bash script pulls the latest image and starts the container 
@@ -15,6 +15,8 @@ under simulated production load.
 Built to understand how large-scale systems handle unpredictable traffic 
 without downtime — and to get hands-on with AWS autoscaling beyond just 
 reading the docs.
+
+
 
 ## Architecture
 ![Architecture Diagram](docs/Architecture_diagra.png)
