@@ -1,5 +1,5 @@
 #!/bin/bash
-ECR_REGISTRY=333372137025.dkr.ecr.us-east-1.amazonaws.com/portfolio/test:latest
+ECR_REGISTRY="" #paste the registry from ECR
 AWS_CLI_Link="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" 
 sudo apt update -y
 sudo apt install unzip -y
