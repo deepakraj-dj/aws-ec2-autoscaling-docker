@@ -148,8 +148,11 @@ By combining automated scaling, containerization, monitoring, and Infrastructure
 ## Security 
 
 ✅ **IAM Roles** - Instances only get permissions they need.
+
 ✅ **Security Groups** - Only the load balancer can talk to instances  
-✅ **No Secrets in Code** - ECR authentication uses IAM, not hardcoded passwords  
+
+✅ **No Secrets in Code** - ECR authentication uses IAM, not hardcoded passwords
+
 ✅ **Health Checks** - unhealthy instances don't get traffic  
 
 ## What I Learned 
