@@ -28,11 +28,17 @@ When someone visits your app:
 ## What I Built
 
 🚀 Automatic Scaling – Instances are created automatically when traffic spikes.
+
 🛡️ Self-Healing – Failed instances are automatically replaced to maintain availability.
+
 🔄 Infrastructure as Code – EC2 Launch Templates and AWS infrastructure are provisioned using Terraform.
+
 🐳 Containerized Deployment – Docker images are stored in Amazon ECR and pulled automatically on new instances.
+
 ⚙️ Bash Automation – User Data scripts install and configure Docker, AWS CLI, and application dependencies during instance launch.
+
 📊 Smart Monitoring – Amazon CloudWatch monitors system metrics, while Amazon SNS sends alert notifications.
+
 ⚡ Zero Downtime Deployments – Application updates are deployed seamlessly without interrupting user traffic.
 
 ## Before You Start
