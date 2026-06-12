@@ -118,7 +118,7 @@ Amazon CloudWatch is used to monitor infrastructure and application metrics, inc
 
 ### Infrastructure as Code with Terraform
 
-The Launch Template used in the infrastructure is created using terraform and it should be added to the ASG manually .
+The Launch Template used in the infrastructure is created using terraform and it should be added to the ASG manually.
 
 ---
 
