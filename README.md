@@ -171,37 +171,14 @@ The architecture is designed with scalability and cost efficiency in mind.
 
 By combining automated scaling, containerization, monitoring, and Infrastructure as Code, this solution demonstrates a production-oriented AWS architecture capable of delivering high availability, operational efficiency, and scalable application deployment.
 
-## Security (Doing It Right)
+## Security 
 
-✅ **IAM Roles** - Instances only get permissions they need, nothing more  
+✅ **IAM Roles** - Instances only get permissions they need.
 ✅ **Security Groups** - Only the load balancer can talk to instances  
 ✅ **No Secrets in Code** - ECR authentication uses IAM, not hardcoded passwords  
-✅ **Terraform State** - Store in S3 with encryption enabled  
-✅ **Health Checks** - Dead or unhealthy instances don't get traffic  
+✅ **Health Checks** - unhealthy instances don't get traffic  
 
-Basically, following the principle: "Give things the minimum they need to work, nothing more."  
-
-## File Structure
-
-```
-.
-├── README.md
-├── Dockerfile              # Nginx container definition
-├── docker/                 # Application source files
-│   └── index.html
-├── terraform/
-│   ├── main.tf
-│   ├── launch_template.tf
-│   ├── scaling_policy.tf
-│   ├── cloudwatch.tf
-│   ├── variables.tf
-│   ├── outputs.tf
-│   ├── terraform.tfvars
-│   └── user_data.sh        # Instance initialization script
-└── scripts/
-    └── stress_test.sh      # Load testing script
-```
-
+  
 ## When You're Done (Kill It All)
 
 Don't forget—AWS will keep charging you while resources are running. Tear it down when done:
@@ -264,6 +241,3 @@ This is version 1.0. Here are ideas for making it even better:
 
 ---
 
-**Built with ❤️ to eliminate manual DevOps work**
-
-Questions? Open an issue. Found a bug? PR welcome.
