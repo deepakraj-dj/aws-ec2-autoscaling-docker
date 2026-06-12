@@ -23,6 +23,7 @@ reading the docs.
 
 ## Tech Stack
 - AWS EC2, Auto Scaling Groups
+- Terraform
 - ALB
 - Bash
 - Docker
