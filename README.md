@@ -55,7 +55,7 @@ You'll need:
   
 ## Get It Running (5 Minutes)
 
-### Step 1: Grab the Code
+### Step 1: Clone the Repo
 ```bash
 git clone https://github.com/yourusername/aws-autoscaling-app.git
 cd aws-autoscaling-app
