@@ -1,12 +1,17 @@
 # Auto-Scaling Containerized Web Application on AWS
 
-## What's This About?
+## Overview
 
-Ever had a website crash because traffic spiked unexpectedly? This project solves that problem. I built a web application that automatically scales up when traffic increases and scales down when things are quiet—all without any manual intervention. If an instance fails, it gets replaced automatically. Traffic gets distributed evenly across all servers. And if something goes wrong, you get an email alert immediately.
+This project simulates a production-grade like web infrastructure on AWS. The goal was to build something that could handle traffic spikes automatically without manual intervention.
 
-Think of it like a restaurant that can instantly hire and fire employees based on how busy it is. No idle staff during slow hours, but always enough hands on deck during rush time.
+An Nginx app runs inside Docker containers, with images stored in ECR. When a new EC2 instance spins up, a User Data bash script pulls the latest image and starts the container automatically — no SSH, no manual setup.
+
+Auto Scaling is triggered by CloudWatch when CPU hits 80%, with SNS sending email alerts in real time. Load testing was done using stress-ng to verify the scaling actually fired under simulated production load.
+
+Built to understand how large-scale systems handle unpredictable traffic without downtime — and to get hands-on with AWS autoscaling beyond just reading the docs.
 
 ## Architecture Diagram
+
 ![Architecture Diagram](docs/Architecture_diagra.png)
 
 ## How It All Works Together
