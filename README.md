@@ -6,6 +6,9 @@ Ever had a website crash because traffic spiked unexpectedly? This project solve
 
 Think of it like a restaurant that can instantly hire and fire employees based on how busy it is. No idle staff during slow hours, but always enough hands on deck during rush time.
 
+## Architecture Diagram
+![Architecture Diagram](docs/Architecture_diagra.png)
+
 ## How It All Works Together
 
 When someone visits your app:
@@ -15,17 +18,7 @@ When someone visits your app:
 4. If CPU gets too high, more instances spin up automatically
 5. You get notified via email if anything looks off
 
-```
-User Request
-     ↓
-Load Balancer (ALB)
-     ↓
-Auto Scaling Group (2-6 EC2 Instances)
-     ↓
-Docker Container (from ECR)
-     ↓
-Your Nginx App
-```
+
 
 ## What I Built
 
