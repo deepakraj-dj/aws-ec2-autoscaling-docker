@@ -178,17 +178,6 @@ By combining automated scaling, containerization, monitoring, and Infrastructure
 ✅ **No Secrets in Code** - ECR authentication uses IAM, not hardcoded passwords  
 ✅ **Health Checks** - unhealthy instances don't get traffic  
 
-  
-## When You're Done (Kill It All)
-
-Don't forget—AWS will keep charging you while resources are running. Tear it down when done:
-```bash
-cd terraform/
-terraform destroy
-```
-
-Terraform will show you everything it's about to delete. Say yes, and in a few minutes everything's gone and you stop bleeding money.
-
 ## What I Learned 
 
 * **Implemented Infrastructure as Code (IaC):** Leveraged Terraform to automate the provisioning of launch template, enabling consistent, repeatable. This approach significantly reduced manual configuration efforts and allowed the entire environment to be recreated quickly when required.
@@ -198,25 +187,6 @@ Terraform will show you everything it's about to delete. Say yes, and in a few m
 * **Established Proactive Monitoring:** Configured Amazon CloudWatch alarms and SNS notifications to monitor infrastructure health and resource utilization. This ensured timely alerting and improved operational visibility for potential issues.
 
 * **Validated Auto Scaling Functionality:** Conducted load-testing exercises to simulate increased application traffic and verify Auto Scaling behavior. Successfully observed dynamic provisioning of additional EC2 instances, confirming the architecture's ability to maintain performance and availability under varying workloads.
-
-
-
-## What's Next?
-
-This is version 1.0. Here are ideas for making it even better:
-
-- **Multi-region failover** - If AWS's entire us-east-1 region explodes, automatically fail over to us-west-2
-- **Spot Instances** - Cut costs by 70% (but trade risk of interruption)
-- **Kubernetes (EKS)** - If your app gets bigger, move to container orchestration
-- **CI/CD Pipeline** - Every GitHub push automatically rebuilds the Docker image and deploys it
-- **Smarter Scaling** - Instead of just CPU, scale based on request count or custom metrics
-- **Blue-Green Deployments** - Swap traffic between two identical environments for zero-downtime updates
-
-## Questions? Issues?
-
-- Check the AWS docs if something breaks
-- Read the Terraform code—it's self-documenting
-- Run `terraform plan` before `apply` to see what's changing
 
 ## Files
 
