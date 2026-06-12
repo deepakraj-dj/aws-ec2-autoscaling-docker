@@ -91,89 +91,85 @@ curl http://<YOUR-ALB-ADDRESS>
 
 Done! Your app is now live and auto-scaling. ✅
 
-## Inside the Machine
+## Architecture Overview
 
-### The Load Balancer (Traffic Cop)
-Sits in front of all your instances and decides who gets the traffic. Has health checks running constantly—if an instance isn't responding, it stops sending requests there. When you scale up, new instances automatically register. When they die, traffic instantly routes around them.
+### Application Load Balancer (ALB)
 
-### Auto Scaling Group (The Elastic Manager)
-Keeps 2-6 instances running at all times. If CPU hits 80% (because your app is getting hammered), it spins up new instances automatically. Once the load drops back down, it kills the idle ones. You only pay for what you actually use.
+The Application Load Balancer serves as the entry point for incoming traffic and distributes requests across multiple EC2 instances. Health checks are continuously performed to ensure traffic is routed only to healthy instances. Newly launched instances are automatically registered with the load balancer, while unhealthy instances are removed from rotation, improving application availability and fault tolerance.
 
-### The Container (Docker)
-Your Nginx app lives in a Docker image stored in AWS's ECR (think of it as Docker Hub, but private and connected to your AWS account). When a new instance launches, a User Data script automatically:
-- Installs Docker
-- Logs into ECR using IAM permissions (no hardcoded passwords!)
-- Pulls the latest image
-- Starts the container
+### Auto Scaling Group (ASG)
 
-No manual SSH-ing around. No "wait, which version is running on this instance?" frustration.
+The Auto Scaling Group maintains a desired number of EC2 instances and dynamically adjusts capacity based on workload demand. Scaling policies are configured to launch additional instances when CPU utilization exceeds predefined thresholds and terminate unnecessary instances when demand decreases. This ensures efficient resource utilization while maintaining application performance.
 
-### The Brain (CloudWatch + SNS)
-Watches your CPU like a hawk. The moment it creeps past 80%, an alarm fires. SNS shoots you an email saying "Hey, things are getting hot—check the dashboard." You can also set up dashboards to visualize everything in real time.
+### Containerized Application Deployment
 
-### Infrastructure as Code (Terraform)
-Instead of clicking around the AWS Console (which is error-prone and hard to repeat), everything is defined in `.tf` files. Change a line, run `terraform apply`, boom—infrastructure updates. Push to Git, collaborate with your team, keep history of every change.
+The Nginx application is packaged as a Docker container and stored in Amazon Elastic Container Registry (ECR). During instance initialization, an EC2 User Data script automatically:
 
-## Watch It Scale (The Fun Part)
+* Installs Docker
+* Authenticates with Amazon ECR using IAM roles
+* Pulls the latest container image
+* Launches the application container
 
-Want to see the auto-scaling in action? Let's hammer the app with traffic and watch AWS spin up new instances.
+This automated provisioning process eliminates manual server configuration and guarantees consistent deployments across all instances.
 
-### Step 1: SSH Into an Instance
-```bash
-ssh -i your-key.pem ec2-user@<instance-ip>
-```
+### Monitoring and Alerting
 
-### Step 2: Crank Up the CPU
-```bash
-# Install stress-ng (a tool that eats CPU)
-sudo yum install -y stress-ng
+Amazon CloudWatch is used to monitor infrastructure and application metrics, including CPU utilization, network traffic, and instance health. CloudWatch alarms are integrated with Amazon SNS to provide real-time email notifications when predefined thresholds are breached, enabling proactive incident response and operational visibility.
 
-# Burn 4 CPU cores for 5 minutes
-stress-ng --cpu 4 --timeout 300s --verbose
-```
+### Infrastructure as Code with Terraform
 
-### Step 3: Watch the Magic
-Open the AWS Console and:
-- Go to **Auto Scaling Groups** → watch instance count climb from 2 to 3, 4, maybe 5
-- Check **CloudWatch** → CPU graph spikes, then more instances come online
-- Look at **Target Group** → new instances appear and turn green as health checks pass
-- Check your email → SNS alert tells you the alarm fired
+All cloud resources are provisioned and managed using Terraform. Infrastructure components, including networking, compute resources, load balancing, monitoring, and scaling policies, are defined declaratively in Terraform configuration files. This approach enables version control, repeatable deployments, team collaboration, and simplified infrastructure management.
 
-### What You're Seeing
-1. **Minute 0-2**: Stress starts, CPU climbs toward 80%
-2. **Minute 2-3**: Alarm triggers, ASG receives scaling request
-3. **Minute 3-4**: New EC2 instances launch (takes ~2 min)
-4. **Minute 4-5**: Load Balancer health checks pass, traffic routes to new instances
-5. **Minute 6+**: After stress stops, instances cool down and extra ones get terminated
+---
 
-This is production-ready auto-scaling working the way it should.
+## Auto Scaling Validation
 
-## Keeping Tabs on Things
+To validate the effectiveness of the auto-scaling configuration, load-testing exercises were conducted by generating sustained CPU-intensive workloads on EC2 instances.
 
-### What Gets Monitored?
-- **CPU Utilization** - How hard your instances are working
-- **Network Traffic** - Incoming and outgoing bytes
-- **Healthy Host Count** - How many instances are actually serving traffic
-- **Request Count** - How many requests the load balancer handled
+### Testing Procedure
 
-### Getting Alerts
-Set your email in the Terraform config:
-```hcl
-sns_email = "your-email@company.com"
-```
+1. Connect to a running EC2 instance via SSH.
+2. Install a stress-testing utility.
+3. Generate CPU load for a defined duration.
+4. Monitor Auto Scaling Group activity, CloudWatch metrics, and load balancer target health.
 
-You'll get messages like: "Production server CPU alarm triggered" when things get spicy. From there, you can log into the AWS Console, check the dashboard, or trigger manual scaling if needed.
+### Observed Results
 
-### Custom Dashboard
-Terraform creates a CloudWatch dashboard so you can see all metrics in one place—no hunting through tabs.
+* CPU utilization increased beyond the configured scaling threshold.
+* CloudWatch alarms were triggered successfully.
+* The Auto Scaling Group launched additional EC2 instances automatically.
+* Newly launched instances completed initialization, passed health checks, and began serving traffic through the load balancer.
+* After workload reduction, excess instances were terminated according to scaling policies.
 
-## Money Matters
+This validation confirmed the architecture's ability to automatically adapt to changing traffic conditions while maintaining application availability.
 
-This setup is deliberately cost-conscious:
-- **t3.medium instances** - Cheap, bursty, perfect for most apps
-- **Minimum 2 instances** - Just enough for high availability, not over-engineered
-- **Auto-scaling** - You only pay when you need the resources
-- **Pro tip**: Switch to Spot Instances in the Terraform code for 70% savings (trade off: might get interrupted randomly)
+---
+
+## Monitoring Strategy
+
+The following operational metrics are continuously monitored:
+
+* CPU Utilization
+* Network Throughput
+* Healthy Host Count
+* Load Balancer Request Count
+* Auto Scaling Group Activity
+
+CloudWatch dashboards provide centralized visibility into infrastructure performance, while SNS notifications ensure critical events are communicated promptly to administrators.
+
+---
+
+## Cost Optimization Considerations
+
+The architecture is designed with scalability and cost efficiency in mind.
+
+* Utilizes cost-effective EC2 instance types suitable for web workloads.
+* Maintains a minimum instance count to ensure high availability.
+* Dynamically scales resources based on demand to prevent over-provisioning.
+* Supports migration to EC2 Spot Instances for additional cost savings where workload interruption is acceptable.
+* Minimizes operational overhead through automation and Infrastructure as Code practices.
+
+By combining automated scaling, containerization, monitoring, and Infrastructure as Code, this solution demonstrates a production-oriented AWS architecture capable of delivering high availability, operational efficiency, and scalable application deployment.
 
 ## Security (Doing It Right)
 
