@@ -18,9 +18,13 @@ Built to understand how large-scale systems handle unpredictable traffic without
 
 When someone visits your app:
 1. Their request hits the **Load Balancer** (traffic cop)
+
 2. Gets routed to the healthiest **EC2 instance** in the group
+
 3. That instance runs your **containerized app** (stored in ECR)
+
 4. If CPU gets too high, more instances spin up automatically
+
 5. You get notified via email if anything looks off
 
 
