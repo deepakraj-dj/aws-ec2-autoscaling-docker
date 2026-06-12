@@ -84,11 +84,11 @@ terraform apply         # Go! Creates load balancer, instances, alarms, etc.
 ```
 
 ### Step 4: Test It
-```bash
-# Get your load balancer's web address
-aws elbv2 describe-load-balancers --region us-east-1 --query 'LoadBalancers[0].DNSName'
 
 # Visit it in your browser or curl it
+Test the Architecture with using the ALB Link or 
+
+```bash
 curl http://<YOUR-ALB-ADDRESS>
 ```
 
