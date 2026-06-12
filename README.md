@@ -33,7 +33,7 @@ reading the docs.
 
 ## Features
 - **Zero-downtime deployments** — the application scales up or down automatically as traffic changes, with no interruptions
-- **Fully hands-off EC2 provisioning with Iac** — launch templates and bash scripts handle everything, so you never manually set up an instance just need to add launch template in asg
+- **Fully hands-off EC2 provisioning with Iac** — launch templates and bash scripts handle everything, so you never manually set up an instance just need to add launch template in ASG
 - **Smart instance initialization** that runs automatically every time a new instance spins up:
   - System patches and updates
   - Docker gets installed and ready
