@@ -178,8 +178,8 @@ By combining automated scaling, containerization, monitoring, and Infrastructure
 |   ├── user_data.sh               
 │   ├── vars.tf             
 │   ├── outputs.tf               
-│   └── terraform.tfvars         
-│              
+│   └── terraform.tfvars  #add this file in .gitignore
+├── .gitignore            
 ├── Dockerfile
 ├── LICENSE
 ├── README.md
