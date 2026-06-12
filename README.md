@@ -169,17 +169,17 @@ By combining automated scaling, containerization, monitoring, and Infrastructure
 
 ```
 .
-├── docker/                      ← You are here
+├── docker/                      
 │   └── index.html             
-├── docs/                  # Your app in a box
+├── docs/                  
     └── Architecture_diagra.png
 ├── terraform/
 │   ├── main.tf
 |   ├── user_data.sh               
 │   ├── vars.tf             
-│   ├── outputs.tf               # What Terraform gives back
-│   ├── terraform.tfvars         # Your actual config values
-│   └──            
+│   ├── outputs.tf               
+│   └── terraform.tfvars         
+│              
 ├── Dockerfile
 ├── LICENSE
 ├── README.md
