@@ -99,7 +99,7 @@ The Application Load Balancer serves as the entry point for incoming traffic and
 
 ### Auto Scaling Group (ASG)
 
-The Auto Scaling Group maintains a desired number of EC2 instances and dynamically adjusts capacity based on workload demand. Scaling policies are configured to launch additional instances when CPU utilization exceeds predefined thresholds and terminate unnecessary instances when demand decreases. This ensures efficient resource utilization while maintaining application performance.
+The Auto Scaling Group maintains a desired number of EC2 instances and dynamically adjusts capacity based on workload demand. In this architecture this process is done using Infrastructure as code(Iac) and should be added manually. Scaling policies are configured to launch additional instances when CPU utilization exceeds predefined thresholds and terminate unnecessary instances when demand decreases. This ensures efficient resource utilization while maintaining application performance.
 
 ### Containerized Application Deployment
 
@@ -132,32 +132,6 @@ To validate the effectiveness of the auto-scaling configuration, load-testing ex
 2. Install a stress-testing utility.
 3. Generate CPU load for a defined duration.
 4. Monitor Auto Scaling Group activity, CloudWatch metrics, and load balancer target health.
-
-### Observed Results
-
-* CPU utilization increased beyond the configured scaling threshold.
-* CloudWatch alarms were triggered successfully.
-* The Auto Scaling Group launched additional EC2 instances automatically.
-* Newly launched instances completed initialization, passed health checks, and began serving traffic through the load balancer.
-* After workload reduction, excess instances were terminated according to scaling policies.
-
-This validation confirmed the architecture's ability to automatically adapt to changing traffic conditions while maintaining application availability.
-
----
-
-## Monitoring Strategy
-
-The following operational metrics are continuously monitored:
-
-* CPU Utilization
-* Network Throughput
-* Healthy Host Count
-* Load Balancer Request Count
-* Auto Scaling Group Activity
-
-CloudWatch dashboards provide centralized visibility into infrastructure performance, while SNS notifications ensure critical events are communicated promptly to administrators.
-
----
 
 ## Cost Optimization Considerations
 
