@@ -84,10 +84,7 @@ terraform apply         # Go! Creates load balancer, instances, alarms, etc.
 ```
 
 ### Step 4: Test It
-Visit it in your browser or curl it
-
-Test the Architecture with using the ALB Link or 
-
+Test the Architecture with using the ALB Link in browser or use curl in linux
 ```bash
 curl http://<YOUR-ALB-ADDRESS>
 ```
