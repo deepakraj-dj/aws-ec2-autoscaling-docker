@@ -172,7 +172,7 @@ By combining automated scaling, containerization, monitoring, and Infrastructure
 ├── docker/                      
 │   └── index.html             
 ├── docs/                  
-    └── Architecture_diagra.png
+|   └── Architecture_diagra.png
 ├── terraform/
 │   ├── main.tf
 |   ├── user_data.sh               
