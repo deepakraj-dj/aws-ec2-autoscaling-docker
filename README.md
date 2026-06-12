@@ -27,10 +27,10 @@ When someone visits your app:
 
 ## What I Built
 
-🚀 **Automatic Scaling** - App grows when busy, shrinks when quiet  
-🛡️ **Self-Healing** - Dead instances get replaced automatically  
-🔄 **Infrastructure as Code** - Everything defined in Terraform (no clicking around AWS Console)  
-🐳 **Containerized** - Docker images pulled from ECR on every instance launch  
+🚀 **Automatic Scaling** - Instances will be created automatically when traffic spikes
+🛡️ **Self-Healing** - Failed instances get replaced automatically  
+🔄 **Infrastructure as Code** - Launch Template for the newly created instance are created using terraform   
+🐳 **Containerized** - Docker images pulled from ECR on every instance launch using the Bash script
 📊 **Smart Monitoring** - CloudWatch watches CPU, SNS sends you alerts  
 ⚡ **Zero Downtime** - New versions deploy smoothly without dropping requests  
 
@@ -39,10 +39,9 @@ When someone visits your app:
 You'll need:
 - An AWS account (with permission to create EC2, VPC, load balancers)
 - [Terraform](https://www.terraform.io/downloads.html) installed
-- [Docker](https://www.docker.com/products/docker-desktop) (to build your app image)
+- [Docker](https://www.docker.com/products/docker-desktop)
 - [AWS CLI](https://aws.amazon.com/cli/) set up with your credentials
-- A GitHub repo to store everything
-
+  
 ## Get It Running (5 Minutes)
 
 ### Step 1: Grab the Code
