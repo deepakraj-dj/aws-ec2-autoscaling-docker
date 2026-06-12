@@ -30,7 +30,8 @@ When someone visits your app:
 🚀 **Automatic Scaling** - Instances will be created automatically when traffic spikes
 🛡️ **Self-Healing** - Failed instances get replaced automatically  
 🔄 **Infrastructure as Code** - Launch Template for the newly created instance are created using terraform   
-🐳 **Containerized** - Docker images pulled from ECR on every instance launch using the Bash script
+🐳 **Containerized** - Docker images pulled from ECR
+⚙️ **BASH Scripting** - Installs and configure the needed infrastuctures including installing docker, aws cli on every new instances automatically
 📊 **Smart Monitoring** - CloudWatch watches CPU, SNS sends you alerts  
 ⚡ **Zero Downtime** - New versions deploy smoothly without dropping requests  
 
