@@ -118,7 +118,7 @@ Amazon CloudWatch is used to monitor infrastructure and application metrics, inc
 
 ### Infrastructure as Code with Terraform
 
-All cloud resources are provisioned and managed using Terraform. Infrastructure components, including networking, compute resources, load balancing, monitoring, and scaling policies, are defined declaratively in Terraform configuration files. This approach enables version control, repeatable deployments, team collaboration, and simplified infrastructure management.
+The Launch Template used in the infrastructure is created using terraform and it should be added to the ASG manually .
 
 ---
 
