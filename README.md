@@ -169,21 +169,22 @@ By combining automated scaling, containerization, monitoring, and Infrastructure
 
 ```
 .
-├── README.md                    ← You are here
-├── Dockerfile                   # Your app in a box
-├── docker/
-│   └── index.html              # Simple demo page
+├── docker/                      ← You are here
+│   └── index.html             
+├── docs/                  # Your app in a box
+    └── Architecture_diagra.png
 ├── terraform/
-│   ├── main.tf                 # VPC, load balancer, networking
-│   ├── launch_template.tf       # EC2 instance configuration
-│   ├── scaling_policy.tf        # When to scale up/down
-│   ├── cloudwatch.tf            # Alarms and dashboards
-│   ├── variables.tf             # Inputs you can customize
+│   ├── main.tf
+|   ├── user_data.sh               
+│   ├── vars.tf             
 │   ├── outputs.tf               # What Terraform gives back
 │   ├── terraform.tfvars         # Your actual config values
-│   └── user_data.sh             # What runs when instances boot
-└── scripts/
-    └── stress_test.sh           # Load testing script
+│   └──            
+├── Dockerfile
+├── LICENSE
+├── README.md
+
+
 ```
 
 ---
