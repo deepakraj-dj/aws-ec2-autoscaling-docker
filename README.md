@@ -102,10 +102,6 @@ Amazon CloudWatch is used to monitor infrastructure and application metrics, inc
 
 The Launch Template used in the infrastructure is created using terraform and it should be added to the ASG manually.
 
-## Auto Scaling Validation
-
-To validate the effectiveness of the auto-scaling configuration, load-testing exercises were conducted by generating sustained CPU-intensive workloads on EC2 instances.
-
 ### Testing Procedure
 
 1. Connect to a running EC2 instance via SSH.
