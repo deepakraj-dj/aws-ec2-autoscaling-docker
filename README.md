@@ -141,7 +141,7 @@ By combining automated scaling, containerization, monitoring, and Infrastructure
 
 * **Validated Auto Scaling Functionality:** Conducted load-testing exercises to simulate increased application traffic and verify Auto Scaling behavior. Successfully observed dynamic provisioning of additional EC2 instances, confirming the architecture's ability to maintain performance and availability under varying workloads.
 
-## Files
+## File Structure
 
 ```
 .
