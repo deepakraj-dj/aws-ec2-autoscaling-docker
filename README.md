@@ -120,7 +120,7 @@ Always run: terraform destroy
 ├── Dockerfile                     # Builds Nginx image with index.html
 ├── .gitignore                     # Excludes credentials & terraform state files
 ├── LICENSE
-├── README.md
+├── README.md                      # Project documentation & setup guide
 
 
 
