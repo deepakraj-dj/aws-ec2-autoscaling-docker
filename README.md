@@ -73,6 +73,14 @@ curl http://<YOUR-ALB-ADDRESS>
 
 Done! Your app is now live and auto-scaling. ✅
 
+## Cost Optimization
+**💰 Budget-Friendly AWS Architecture**
+- **t3.micro instances** – Free tier eligible (750 hrs/month), or ~₹0.99/hour on-demand
+- **Auto Scaling on demand** – Pay only for instances running under load; idle capacity scales down automatically via CloudWatch
+- **Infrastructure as Code** – Terraform eliminates manual overhead of creating launch template and prevents costly configuration drift
+- **Containerization** – Docker + ECR reduces deployment time and resource waste compared to traditional setups
+**Real-world cost**: A small production setup runs under $10/month during light traffic periods. is it good
+
 ## Security 
 
 ✅ **IAM Roles** - Instances only get permissions they need.
