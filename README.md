@@ -39,7 +39,7 @@ You'll need:
 
 ### Step 1: Clone the Repo
 ```bash
-git clone https://github.com/yourusername/aws-autoscaling-app.git
+git clone https://github.com/deepakraj-dj/aws-ec2-autoscaling-docker.git
 cd aws-autoscaling-app
 ```
 
