@@ -73,54 +73,6 @@ curl http://<YOUR-ALB-ADDRESS>
 
 Done! Your app is now live and auto-scaling. ✅
 
-## Architecture Overview
-
-### Application Load Balancer (ALB)
-
-The Application Load Balancer serves as the entry point for incoming traffic and distributes requests across multiple EC2 instances. Health checks are continuously performed to ensure traffic is routed only to healthy instances. Newly launched instances are automatically registered with the load balancer, while unhealthy instances are removed from rotation, improving application availability and fault tolerance.
-
-### Auto Scaling Group (ASG)
-
-The Auto Scaling Group maintains a desired number of EC2 instances and dynamically adjusts capacity based on workload demand. In this architecture this process is done using Infrastructure as code(Iac) and should be added manually. Scaling policies are configured to launch additional instances when CPU utilization exceeds predefined thresholds and terminate unnecessary instances when demand decreases. This ensures efficient resource utilization while maintaining application performance.
-
-### Containerized Application Deployment
-
-The Nginx application is packaged as a Docker container and stored in Amazon Elastic Container Registry (ECR). During instance initialization, an EC2 User Data script automatically:
-
-* Installs Docker
-* Authenticates with Amazon ECR using IAM roles
-* Pulls the latest container image
-* Launches the application container
-
-This automated provisioning process eliminates manual server configuration and guarantees consistent deployments across all instances.
-
-### Monitoring and Alerting
-
-Amazon CloudWatch is used to monitor infrastructure and application metrics, including CPU utilization, network traffic, and instance health. CloudWatch alarms are integrated with Amazon SNS to provide real-time email notifications when predefined thresholds are breached, enabling proactive incident response and operational visibility.
-
-### Infrastructure as Code with Terraform
-
-The Launch Template used in the infrastructure is created using terraform and it should be added to the ASG manually.
-
-### Testing Procedure
-
-1. Connect to a running EC2 instance via SSH.
-2. Install a stress-testing utility.
-3. Generate CPU load for a defined duration.
-4. Monitor Auto Scaling Group activity, CloudWatch metrics, and load balancer target health.
-
-## Cost Optimization Considerations
-
-The architecture is designed with scalability and cost efficiency in mind.
-
-* Utilizes cost-effective EC2 instance types suitable for web workloads.
-* Maintains a minimum instance count to ensure high availability.
-* Dynamically scales resources based on demand to prevent over-provisioning.
-* Supports migration to EC2 Spot Instances for additional cost savings where workload interruption is acceptable.
-* Minimizes operational overhead through automation and Infrastructure as Code practices.
-
-By combining automated scaling, containerization, monitoring, and Infrastructure as Code, this solution demonstrates a production-oriented AWS architecture capable of delivering high availability, operational efficiency, and scalable application deployment.
-
 ## Security 
 
 ✅ **IAM Roles** - Instances only get permissions they need.
