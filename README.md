@@ -97,8 +97,6 @@ Done! Your app is now live and auto-scaling. ✅
 
 * **Automated Instance Configuration:** Utilized EC2 User Data scripts to automatically install and configure Docker during instance launch. This eliminated the need for manual server setup, improved deployment consistency, and reduced operational overhead.
 
-* **Established Proactive Monitoring:** Configured Amazon CloudWatch alarms and SNS notifications to monitor infrastructure health and resource utilization. This ensured timely alerting and improved operational visibility for potential issues.
-
 * **Validated Auto Scaling Functionality:** Conducted load-testing exercises to simulate increased application traffic and verify Auto Scaling behavior. Successfully observed dynamic provisioning of additional EC2 instances, confirming the architecture's ability to maintain performance and availability under varying workloads.
 
 ## File Structure
