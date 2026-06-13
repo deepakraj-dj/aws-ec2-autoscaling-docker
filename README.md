@@ -27,24 +27,6 @@ When someone visits your app:
 
 5. You get notified via email if anything looks off
 
-
-
-## What I Built
-
-🚀 Automatic Scaling – Instances are created automatically when traffic spikes.
-
-🛡️ Self-Healing – Failed instances are automatically replaced to maintain availability.
-
-🔄 Infrastructure as Code – EC2 Launch Templates and AWS infrastructure are provisioned using Terraform.
-
-🐳 Containerized Deployment – Docker images are stored in Amazon ECR and pulled automatically on new instances.
-
-⚙️ Bash Automation – User Data scripts install and configure Docker, AWS CLI, and application dependencies during instance launch.
-
-📊 Smart Monitoring – Amazon CloudWatch monitors system metrics, while Amazon SNS sends alert notifications.
-
-⚡ Zero Downtime Deployments – Application updates are deployed seamlessly without interrupting user traffic.
-
 ## Before You Start
 
 You'll need:
@@ -57,7 +39,7 @@ You'll need:
 
 ### Step 1: Clone the Repo
 ```bash
-git clone https://github.com/yourusername/aws-autoscaling-app.git
+git clone https://github.com/deepakraj-dj/aws-ec2-autoscaling-docker.git
 cd aws-autoscaling-app
 ```
 
@@ -91,59 +73,13 @@ curl http://<YOUR-ALB-ADDRESS>
 
 Done! Your app is now live and auto-scaling. ✅
 
-## Architecture Overview
-
-### Application Load Balancer (ALB)
-
-The Application Load Balancer serves as the entry point for incoming traffic and distributes requests across multiple EC2 instances. Health checks are continuously performed to ensure traffic is routed only to healthy instances. Newly launched instances are automatically registered with the load balancer, while unhealthy instances are removed from rotation, improving application availability and fault tolerance.
-
-### Auto Scaling Group (ASG)
-
-The Auto Scaling Group maintains a desired number of EC2 instances and dynamically adjusts capacity based on workload demand. In this architecture this process is done using Infrastructure as code(Iac) and should be added manually. Scaling policies are configured to launch additional instances when CPU utilization exceeds predefined thresholds and terminate unnecessary instances when demand decreases. This ensures efficient resource utilization while maintaining application performance.
-
-### Containerized Application Deployment
-
-The Nginx application is packaged as a Docker container and stored in Amazon Elastic Container Registry (ECR). During instance initialization, an EC2 User Data script automatically:
-
-* Installs Docker
-* Authenticates with Amazon ECR using IAM roles
-* Pulls the latest container image
-* Launches the application container
-
-This automated provisioning process eliminates manual server configuration and guarantees consistent deployments across all instances.
-
-### Monitoring and Alerting
-
-Amazon CloudWatch is used to monitor infrastructure and application metrics, including CPU utilization, network traffic, and instance health. CloudWatch alarms are integrated with Amazon SNS to provide real-time email notifications when predefined thresholds are breached, enabling proactive incident response and operational visibility.
-
-### Infrastructure as Code with Terraform
-
-The Launch Template used in the infrastructure is created using terraform and it should be added to the ASG manually .
-
----
-
-## Auto Scaling Validation
-
-To validate the effectiveness of the auto-scaling configuration, load-testing exercises were conducted by generating sustained CPU-intensive workloads on EC2 instances.
-
-### Testing Procedure
-
-1. Connect to a running EC2 instance via SSH.
-2. Install a stress-testing utility.
-3. Generate CPU load for a defined duration.
-4. Monitor Auto Scaling Group activity, CloudWatch metrics, and load balancer target health.
-
-## Cost Optimization Considerations
-
-The architecture is designed with scalability and cost efficiency in mind.
-
-* Utilizes cost-effective EC2 instance types suitable for web workloads.
-* Maintains a minimum instance count to ensure high availability.
-* Dynamically scales resources based on demand to prevent over-provisioning.
-* Supports migration to EC2 Spot Instances for additional cost savings where workload interruption is acceptable.
-* Minimizes operational overhead through automation and Infrastructure as Code practices.
-
-By combining automated scaling, containerization, monitoring, and Infrastructure as Code, this solution demonstrates a production-oriented AWS architecture capable of delivering high availability, operational efficiency, and scalable application deployment.
+## Cost Optimization
+**💰 Budget-Friendly AWS Architecture**
+- **t3.micro instances** – Free tier eligible (750 hrs/month), or ~₹0.99/hour on-demand
+- **Auto Scaling on demand** – Pay only for instances running under load; idle capacity scales down automatically via CloudWatch
+- **Infrastructure as Code** – Terraform automates launch template provisioning, reducing manual errors and costly configuration drift
+- **Containerization** – Docker + ECR reduces deployment time and resource waste compared to traditional setups
+- **Real-world cost**: A small production setup runs under $10/month during light traffic periods.
 
 ## Security 
 
@@ -161,29 +97,28 @@ By combining automated scaling, containerization, monitoring, and Infrastructure
 
 * **Automated Instance Configuration:** Utilized EC2 User Data scripts to automatically install and configure Docker during instance launch. This eliminated the need for manual server setup, improved deployment consistency, and reduced operational overhead.
 
-* **Established Proactive Monitoring:** Configured Amazon CloudWatch alarms and SNS notifications to monitor infrastructure health and resource utilization. This ensured timely alerting and improved operational visibility for potential issues.
-
 * **Validated Auto Scaling Functionality:** Conducted load-testing exercises to simulate increased application traffic and verify Auto Scaling behavior. Successfully observed dynamic provisioning of additional EC2 instances, confirming the architecture's ability to maintain performance and availability under varying workloads.
 
-## Files
+## File Structure
 
 ```
 .
-├── README.md                    ← You are here
-├── Dockerfile                   # Your app in a box
-├── docker/
-│   └── index.html              # Simple demo page
+├── docker/                      
+│   └── index.html             
+├── docs/                  
+|   └── Architecture_diagra.png
 ├── terraform/
-│   ├── main.tf                 # VPC, load balancer, networking
-│   ├── launch_template.tf       # EC2 instance configuration
-│   ├── scaling_policy.tf        # When to scale up/down
-│   ├── cloudwatch.tf            # Alarms and dashboards
-│   ├── variables.tf             # Inputs you can customize
-│   ├── outputs.tf               # What Terraform gives back
-│   ├── terraform.tfvars         # Your actual config values
-│   └── user_data.sh             # What runs when instances boot
-└── scripts/
-    └── stress_test.sh           # Load testing script
+│   ├── main.tf
+|   ├── user_data.sh               
+│   ├── vars.tf             
+│   ├── outputs.tf               
+│   └── terraform.tfvars  #add this file in .gitignore
+├── .gitignore            
+├── Dockerfile
+├── LICENSE
+├── README.md
+
+
 ```
 
 ---
