@@ -79,7 +79,7 @@ Done! Your app is now live and auto-scaling. ✅
 - **Auto Scaling on demand** – Pay only for instances running under load; idle capacity scales down automatically via CloudWatch
 - **Infrastructure as Code** – Terraform automates launch template provisioning, reducing manual errors and costly configuration drift
 - **Containerization** – Docker + ECR reduces deployment time and resource waste compared to traditional setups
-**Real-world cost**: A small production setup runs under $10/month during light traffic periods.
+- **Real-world cost**: A small production setup runs under $10/month during light traffic periods.
 
 ## Security 
 
