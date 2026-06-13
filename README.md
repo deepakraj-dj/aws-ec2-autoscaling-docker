@@ -81,6 +81,10 @@ Done! Your app is now live and auto-scaling. ✅
 - **Containerization** – Docker + ECR reduces deployment time and resource waste compared to traditional setups
 - **Real-world cost**: A small production setup runs under $10/month during light traffic periods.
 
+## Cost Warning ⚠️
+This setup uses paid AWS resources. Estimate: ~$5-10/day if left running. 
+Always run: terraform destroy
+
 ## Security 
 
 ✅ **IAM Roles** - Instances only get permissions they need.
