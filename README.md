@@ -104,26 +104,6 @@ Done! Your app is now live and auto-scaling. ✅
 ```
 .
 ├── docker/                      
-│   └── index.html                 # Sample webpage content (served by Nginx in Docker)
-├── docs/                  
-|   └── Architecture_diagra.png    # Architecture digram of the full flow 
-├── terraform/
-│   ├── main.tf                     # Terraform code to create the launch template by the values of vars.tf and .tfvars
-│   ├── outputs.tf                  # The output will be visible in terminal after the process been completed
-|   ├── user_data.sh                # The linux Bash script to download, configure AWSCLI v2, docker, nginx and ECR
-│   ├── vars.tf                     # Initialzing variables        
-│   └── terraform.tfvars           # add this file in .gitignore before pushing into github
-├── .gitignore            
-├── Dockerfile
-├── LICENSE
-├── README.md
-
-
-
-
-
-.
-├── docker/                      
 │   └── index.html                 # Sample website (served by Nginx container)
 ├── docs/                  
 │   └── Architecture_diagra.png    # System architecture diagram
@@ -137,6 +117,9 @@ Done! Your app is now live and auto-scaling. ✅
 ├── .gitignore                     # Excludes credentials & terraform state files
 ├── LICENSE
 ├── README.md
+
+
+
 
 
 ```
